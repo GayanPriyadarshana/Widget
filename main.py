@@ -17,14 +17,10 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div([
-                html.Img(
-                    src="/assets/msft.png",
-                    style={"width": "6rem"}
-                ),
                 html.Div([
                     html.Div([
                         html.Div([
-                            html.P("Change (1D)")
+                            html.P("Total Value")
                         ]),
                         html.Div([
                             dcc.Graph(id='indicator-graph', figure={},
@@ -36,23 +32,8 @@ app.layout = html.Div([
                             dcc.Graph(id='daily-line', figure={},
                                       config={'displayModeBar': False})
                         ])
-                    ]),
-                    html.Div([
-                        html.Div([
-                            html.Button('SELL')
-                        ]),
-                        html.Div([
-                            html.Button('BUY')
-                        ])
-                    ]),
-                    html.Div([
-                        html.Div([
-                            html.Label(id='low-price', children='12.237')
-                        ]),
-                        html.Div([
-                            html.Label(id='high-price', children='13.418')
-                        ])
-                    ]),
+                    ])
+                   
                 ])
             ], style={'width': '24rem', 'marginTop': '1rem'})
         ], style={'width': '50%', 'margin': '0 auto'})
@@ -119,47 +100,6 @@ def update_graph(timer):
         fig.update_traces(delta_increasing_color='red')
 
     return fig
-
-
-
-
-@app.callback(
-    Output('high-price', 'children'),
-    Output('high-price', 'className'),
-    Input('update', 'n_intervals')
-)
-def update_graph(timer):
-    if timer ==0:
-        dff_filtered = dff.iloc[[21,22]]
-        print(dff_filtered)
-    elif timer == 1:
-        dff_filtered = dff.iloc[[20,21]]
-        print(dff_filtered)
-    elif timer == 2:
-        dff_filtered = dff.iloc[[19,20]]
-        print(dff_filtered)
-    elif timer == 3:
-        dff_filtered = dff.iloc[[18,19]]
-        print(dff_filtered)
-    elif timer == 4:
-        dff_filtered = dff.iloc[[17,18]]
-        print(dff_filtered)
-    elif timer == 5:
-        dff_filtered = dff.iloc[[16,17]]
-        print(dff_filtered)
-    elif timer > 5:
-        return dash.no_update
-
-    recent_high = dff_filtered['rate'].iloc[0]
-    older_high = dff_filtered['rate'].iloc[1]
-
-
-    if recent_high > older_high:
-        return recent_high, "mt-2 bg-success text-white p-1 border border-primary border-top-0"
-    elif recent_high == older_high:
-        return recent_high, "mt-2 bg-white p-1 border border-primary border-top-0"
-    elif recent_high < older_high:
-        return recent_high, "mt-2 bg-danger text-white p-1 border border-primary border-top-0"
 
 
 if __name__ == '__main__':
