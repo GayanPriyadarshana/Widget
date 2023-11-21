@@ -19,7 +19,7 @@ app.layout = html.Div([
             html.Div([
                 # First Row: Title
                 html.Div([
-                    html.P("Closing Value", style={'textAlign': 'Left', 'marginBottom': '1px', 'color': '#AAAAAA', 'fontSize': '24px', 'fontWeight': 'bold'})
+                    html.P("Closing Value", style={'textAlign': 'Left', 'marginBottom': '-20px', 'color': '#AAAAAA', 'fontSize': '24px', 'fontWeight': 'bold'})
                 ]),
                 # Second Row: Indicator Graph and Closing Value
                 html.Div([
