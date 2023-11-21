@@ -19,19 +19,19 @@ app.layout = html.Div([
             html.Div([
                 # First Row: Title
                 html.Div([
-                    html.P("Closing Value", style={'textAlign': 'Left', 'marginBottom': '1px'})
+                    html.P("Closing Value", style={'textAlign': 'Left', 'marginBottom': '1px', 'color': '#AAAAAA', 'fontSize': '24px', 'fontWeight': 'bold'})
                 ]),
                 # Second Row: Indicator Graph and Closing Value
                 html.Div([
                     # Closing Value (Left)
                     html.Div([
-                        html.P(id='closing-value', children='$0.00')
-                    ],className='six columns', style={'marginTop': '1px'}),
+                        html.P(id='closing-value', children='$0.00', style={'color': 'black', 'fontSize': '35px'})
+                    ],className='six columns', style={'marginTop': '1x'}),
                     # Indicator Graph (Right)
                     html.Div([
                         dcc.Graph(id='indicator-graph', figure={},
                                   config={'displayModeBar': False})
-                    ],className='six columns', style={'marginTop': '1px'}),
+                    ],className='six columns', style={'marginTop': '35px'}),
                 ], style={'justifyContent': 'space-between', 'display': 'flex'}),
                 # Third Row: Daily Line Graph
                 html.Div([
