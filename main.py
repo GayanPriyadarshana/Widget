@@ -11,13 +11,12 @@ dff = dff[dff.indicator.isin(['high'])]
 
 # Create the Dash app
 app = dash.Dash(__name__)
-
+app.server.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 # Define the layout of the app
 app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div([
-                html.Div([
                     html.Div([
                         html.Div([
                             html.P("Total Value")
@@ -25,16 +24,14 @@ app.layout = html.Div([
                         html.Div([
                             dcc.Graph(id='indicator-graph', figure={},
                                       config={'displayModeBar': False})
-                        ])
+                        ], style={'float': 'right', 'width': 'auto'}) # Left align the graph)
                     ]),
-                    html.Div([
+             
                         html.Div([
                             dcc.Graph(id='daily-line', figure={},
                                       config={'displayModeBar': False})
-                        ])
-                    ])
-                   
-                ])
+                        ], style={'marginTop': '70px'} )
+           
             ], style={'width': '24rem', 'marginTop': '1rem'})
         ], style={'width': '50%', 'margin': '0 auto'})
     ]),
@@ -73,6 +70,7 @@ def update_graph(timer):
         return fig.update_traces(fill='tozeroy',line={'color':'green'})
     elif day_end < day_start:
         return fig.update_traces(fill='tozeroy',
+                                 
                              line={'color': 'red'})
 
 
@@ -91,7 +89,7 @@ def update_graph(timer):
         value=day_end,
         delta={'reference': day_start, 'relative': True, 'valueformat': '.2%'}))
     
-    fig.update_traces(delta_font={'size':12})
+    fig.update_traces(delta_font={'size':16})
     fig.update_layout(height=30, width=70)
 
     if day_end >= day_start:
