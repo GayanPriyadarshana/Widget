@@ -17,27 +17,31 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div([
+                # First Row: Title
+                html.Div([
+                    html.P("Closing Value", style={'textAlign': 'Left', 'marginBottom': '1px'})
+                ]),
+                # Second Row: Indicator Graph and Closing Value
+                html.Div([
+                    # Closing Value (Left)
                     html.Div([
-                        html.Div([
-                            html.P("Total Value")
-                        ]),
-                        html.Div([
-                            dcc.Graph(id='indicator-graph', figure={},
-                                      config={'displayModeBar': False})
-                        ], style={'float': 'right', 'width': 'auto'}) # Left align the graph)
-                    ]),
-             
-                        html.Div([
-                            dcc.Graph(id='daily-line', figure={},
-                                      config={'displayModeBar': False})
-                        ], style={'marginTop': '70px'} )
-           
-            ], style={'width': '24rem', 'marginTop': '1rem'})
+                        html.P(id='closing-value', children='$0.00')
+                    ],className='six columns', style={'marginTop': '1px'}),
+                    # Indicator Graph (Right)
+                    html.Div([
+                        dcc.Graph(id='indicator-graph', figure={},
+                                  config={'displayModeBar': False})
+                    ],className='six columns', style={'marginTop': '1px'}),
+                ], style={'justifyContent': 'space-between', 'display': 'flex'}),
+                # Third Row: Daily Line Graph
+                html.Div([
+                    dcc.Graph(id='daily-line', figure={},
+                              config={'displayModeBar': False})
+                ])
+            ], style={'width': '24rem', 'marginTop': '10px'})
         ], style={'width': '50%', 'margin': '0 auto'})
     ]),
-
     dcc.Interval(id='update', n_intervals=0, interval=1000*5)
-
 ])
 
 # ... [Your callback functions here] ...
@@ -98,6 +102,16 @@ def update_graph(timer):
         fig.update_traces(delta_increasing_color='red')
 
     return fig
+
+# Callback function to update the closing value
+@app.callback(
+    Output('closing-value', 'children'),
+    Input('update', 'n_intervals')
+)
+def update_closing_value(timer):
+    # Extract the latest closing value from your data
+    latest_close = dff['rate'].iloc[-1]  # Assuming 'rate' is the closing value
+    return f"${latest_close:.2f}"
 
 
 if __name__ == '__main__':
