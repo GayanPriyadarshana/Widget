@@ -94,7 +94,7 @@ def update_graph(timer):
         delta={'reference': day_start, 'relative': True, 'valueformat': '.2%'}))
     
     fig.update_traces(delta_font={'size':16})
-    fig.update_layout(height=30, width=70)
+    fig.update_layout(height=40, width=100)
 
     if day_end >= day_start:
         fig.update_traces(delta_decreasing_color='green')
