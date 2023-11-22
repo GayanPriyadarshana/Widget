@@ -11,7 +11,7 @@ dff = pd.read_csv("data.csv")
 dff = dff[dff.indicator.isin(['high'])]
 
 # Create the Dash app
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, external_stylesheets=['assets\style.css'])
 app.server.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 # Define the layout of the app
 app.layout = html.Div([
@@ -69,6 +69,8 @@ def update_graph(timer):
                                              showticklabels=False,
                                              
                                              ))
+    fig.update_xaxes(fixedrange=True)
+    fig.update_yaxes(fixedrange=True)
 
     day_start = dff_rv[dff_rv['date'] == dff_rv['date'].min()]['rate'].values[0]
     day_end = dff_rv[dff_rv['date'] == dff_rv['date'].max()]['rate'].values[0]
