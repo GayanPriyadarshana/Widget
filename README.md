@@ -4,7 +4,7 @@ Project Title: Finance Widget
 This project is a Dash application designed to visualize financial data. It utilizes Plotly for interactive charting and Pandas for data manipulation. The primary focus is on displaying closing values, rate changes, and daily trends in financial markets.
 
 **Features**
-*Closing Value Display: A prominently featured closing value indicator that updates dynamically.
+* Closing Value Display: A prominently featured closing value indicator that updates dynamically.
 *Interactive Graphs: Two main visual components:
 *A line graph showing daily rate changes.
 *An indicator graph displaying the rate change relative to the start of the day.
