@@ -66,7 +66,8 @@ def update_graph(timer):
                                              xaxis=dict(
                                              title=None,
                                              showgrid=False,
-                                             showticklabels=False
+                                             showticklabels=False,
+                                             
                                              ))
 
     day_start = dff_rv[dff_rv['date'] == dff_rv['date'].min()]['rate'].values[0]
