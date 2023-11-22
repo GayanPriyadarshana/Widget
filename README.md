@@ -16,3 +16,6 @@ This project is a Dash application designed to visualize financial data. It util
 * **Plotly**: For creating interactive charts.
 * **Pandas**: For data manipulation and analysis.
 * **CSS**: Custom styles for enhancing the visual appeal of the application.
+
+
+![image](https://github.com/GayanPriyadarshana/Widget/assets/79711930/14bf9d32-c40a-4cb3-8b14-b8099cf46ac4)
