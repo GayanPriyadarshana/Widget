@@ -38,7 +38,7 @@ app.layout = html.Div([
                 html.Div([
                     dcc.Graph(id='daily-line', figure={},
                               config={'displayModeBar': False},
-                               className='scorecard__graph')
+                               className='line-chart')
                 ])
             ], style={'width': '24rem', 'marginTop': '10px'})
         ], style={'width': '50%', 'margin': '0 auto'})

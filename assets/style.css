@@ -1,8 +1,8 @@
-.scorecard__graph {
+.line-chart {
     position: relative;
 }
 
-.scorecard__graph::before {
+.line-chart::before {
     content: '';
     display: block;
     background: linear-gradient(#fff0, white);
