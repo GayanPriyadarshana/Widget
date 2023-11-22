@@ -3,6 +3,7 @@ from dash import dcc, html, Output, Input
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 
 # ... [Your data loading and processing code here] ...
 
@@ -62,21 +63,27 @@ def update_graph(timer):
                                              showticklabels=False
                                              ),
                                              xaxis=dict(
-                                             title=None,
-                                             showgrid=False,
-                                             showticklabels=False
+                                                title=None,
+                                                showgrid=False,
+                                                showticklabels=False
                                              ))
 
-    day_start = dff_rv[dff_rv['date'] == dff_rv['date'].min()]['rate'].values[0]
-    day_end = dff_rv[dff_rv['date'] == dff_rv['date'].max()]['rate'].values[0]
+     # Generate a gradient fill
+    y_vals = dff_rv['rate'].values
+    x_vals = dff_rv['date'].values
+    colors = np.linspace(0, 1, len(y_vals))  # Generate a range of color intensities
 
-    if day_end >= day_start:
-        return fig.update_traces(fill='tozeroy',line={'color':'green'})
-    elif day_end < day_start:
-        return fig.update_traces(fill='tozeroy',
-                                 
-                             line={'color': 'red'})
+    for i, color in enumerate(colors):
+        fig.add_trace(go.Scatter(
+            x=[x_vals[i], x_vals[i]],  # Same x, different y's to create vertical gradient effect
+            y=[0, y_vals[i]],  # From 0 to the y-value of the line
+            mode='lines',
+            line=dict(width=0),  # No border line
+            fill='tonexty',
+            fillcolor=f'rgba(0, 123, 255, {color})'  # Replace with your desired color
+        ))
 
+    return fig
 
 @app.callback(
         Output('indicator-graph', 'figure'),
