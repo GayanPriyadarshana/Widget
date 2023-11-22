@@ -3,6 +3,7 @@ from dash import dcc, html, Output, Input
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 # ... [Your data loading and processing code here] ...
 
@@ -36,7 +37,8 @@ app.layout = html.Div([
                 # Third Row: Daily Line Graph
                 html.Div([
                     dcc.Graph(id='daily-line', figure={},
-                              config={'displayModeBar': False})
+                              config={'displayModeBar': False},
+                               className='scorecard__graph')
                 ])
             ], style={'width': '24rem', 'marginTop': '10px'})
         ], style={'width': '50%', 'margin': '0 auto'})
